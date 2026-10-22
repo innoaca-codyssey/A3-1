@@ -1,0 +1,53 @@
+{
+  "settings_tested": 27,
+  "best_common_success": 12,
+  "tests": 20,
+  "best_common_parameters": {
+    "blur_kernel": 5,
+    "canny_low": 50,
+    "canny_high": 150,
+    "min_area_ratio": 0.02,
+    "selection": "scored"
+  },
+  "per_image_oracle_success": 16,
+  "cases_successful_settings": {
+    "simple-01.jpg": 24,
+    "simple-02.jpg": 9,
+    "simple-03.jpg": 12,
+    "simple-04.jpg": 21,
+    "simple-05.jpg": 12,
+    "shadow-01.jpg": 0,
+    "shadow-02.jpg": 12,
+    "shadow-03.jpg": 0,
+    "shadow-04.jpg": 6,
+    "shadow-05.jpg": 6,
+    "rotation-01.jpg": 14,
+    "rotation-02.jpg": 2,
+    "rotation-03.jpg": 12,
+    "rotation-04.jpg": 16,
+    "rotation-05.jpg": 18,
+    "clutter-01.jpg": 3,
+    "clutter-02.jpg": 0,
+    "clutter-03.jpg": 0,
+    "clutter-04.jpg": 21,
+    "clutter-05.jpg": 21
+  },
+  "tradeoff_example": {
+    "A": "shadow-02.jpg",
+    "B": "clutter-01.jpg",
+    "setting_A": {
+      "blur_kernel": 3,
+      "canny_low": 50,
+      "canny_high": 150,
+      "min_area_ratio": 0.02,
+      "selection": "scored"
+    },
+    "setting_B": {
+      "blur_kernel": 3,
+      "canny_low": 100,
+      "canny_high": 250,
+      "min_area_ratio": 0.02,
+      "selection": "scored"
+    }
+  }
+}

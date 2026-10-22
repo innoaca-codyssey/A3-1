@@ -1,0 +1,206 @@
+{
+  "images": [
+    {
+      "file": "simple-01.jpg",
+      "mean": 123.92783703703704,
+      "std": 27.819537068623873,
+      "dark_fraction_below_64": 0.0032213991769547323
+    },
+    {
+      "file": "simple-02.jpg",
+      "mean": 110.78063209876544,
+      "std": 36.45554365126233,
+      "dark_fraction_below_64": 0.05482962962962963
+    },
+    {
+      "file": "simple-03.jpg",
+      "mean": 56.364319341563785,
+      "std": 60.48680723261182,
+      "dark_fraction_below_64": 0.7716
+    },
+    {
+      "file": "simple-04.jpg",
+      "mean": 146.50880164609055,
+      "std": 34.93940565303012,
+      "dark_fraction_below_64": 0.0007736625514403292
+    },
+    {
+      "file": "simple-05.jpg",
+      "mean": 147.4019193415638,
+      "std": 32.99684935607094,
+      "dark_fraction_below_64": 0.0034271604938271604
+    },
+    {
+      "file": "shadow-01.jpg",
+      "mean": 76.6389465020576,
+      "std": 50.105711962168755,
+      "dark_fraction_below_64": 0.5732115226337449
+    },
+    {
+      "file": "shadow-02.jpg",
+      "mean": 39.553254320987655,
+      "std": 28.485336119727275,
+      "dark_fraction_below_64": 0.8902880658436214
+    },
+    {
+      "file": "shadow-03.jpg",
+      "mean": 85.92869465020576,
+      "std": 54.34816477409815,
+      "dark_fraction_below_64": 0.5337382716049383
+    },
+    {
+      "file": "shadow-04.jpg",
+      "mean": 87.61197530864197,
+      "std": 55.09025680520638,
+      "dark_fraction_below_64": 0.4958962962962963
+    },
+    {
+      "file": "shadow-05.jpg",
+      "mean": 82.1585925925926,
+      "std": 43.92227308645276,
+      "dark_fraction_below_64": 0.47542057613168726
+    },
+    {
+      "file": "rotation-01.jpg",
+      "mean": 82.81496625129803,
+      "std": 29.52580760001191,
+      "dark_fraction_below_64": 0.11323857736240914
+    },
+    {
+      "file": "rotation-02.jpg",
+      "mean": 87.86187175493251,
+      "std": 58.80465720730901,
+      "dark_fraction_below_64": 0.6474480789200415
+    },
+    {
+      "file": "rotation-03.jpg",
+      "mean": 55.4060020768432,
+      "std": 48.17081457425917,
+      "dark_fraction_below_64": 0.8466653686396677
+    },
+    {
+      "file": "rotation-04.jpg",
+      "mean": 131.26410436137073,
+      "std": 25.1987083203697,
+      "dark_fraction_below_64": 0.0050623052959501555
+    },
+    {
+      "file": "rotation-05.jpg",
+      "mean": 138.91306723779854,
+      "std": 33.78019730667709,
+      "dark_fraction_below_64": 0.018843457943925234
+    },
+    {
+      "file": "clutter-01.jpg",
+      "mean": 91.84996872427983,
+      "std": 64.16036964515663,
+      "dark_fraction_below_64": 0.3817234567901235
+    },
+    {
+      "file": "clutter-02.jpg",
+      "mean": 93.92798189300412,
+      "std": 64.79431581196312,
+      "dark_fraction_below_64": 0.35669300411522636
+    },
+    {
+      "file": "clutter-03.jpg",
+      "mean": 97.43117530864197,
+      "std": 65.27082758739736,
+      "dark_fraction_below_64": 0.38508148148148147
+    },
+    {
+      "file": "clutter-04.jpg",
+      "mean": 75.12977119341564,
+      "std": 59.38360676864447,
+      "dark_fraction_below_64": 0.5600592592592593
+    },
+    {
+      "file": "clutter-05.jpg",
+      "mean": 124.307129218107,
+      "std": 66.82997009515346,
+      "dark_fraction_below_64": 0.28872098765432097
+    }
+  ],
+  "shadow_ablation": [
+    {
+      "file": "shadow-01.jpg",
+      "condition": "unshadowed",
+      "edge_fraction": 0.02402139917695473,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-01.jpg",
+      "condition": "shadowed",
+      "edge_fraction": 0.0041448559670781895,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-02.jpg",
+      "condition": "unshadowed",
+      "edge_fraction": 0.016734156378600824,
+      "iou": 0.9676756045402204,
+      "corner_rmse": 0.0035849483227984743,
+      "success": true
+    },
+    {
+      "file": "shadow-02.jpg",
+      "condition": "shadowed",
+      "edge_fraction": 0.002069135802469136,
+      "iou": 0.9676756045402204,
+      "corner_rmse": 0.0035849483227984743,
+      "success": true
+    },
+    {
+      "file": "shadow-03.jpg",
+      "condition": "unshadowed",
+      "edge_fraction": 0.05290041152263374,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-03.jpg",
+      "condition": "shadowed",
+      "edge_fraction": 0.013195061728395062,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-04.jpg",
+      "condition": "unshadowed",
+      "edge_fraction": 0.07505349794238683,
+      "iou": 0.9734836663814366,
+      "corner_rmse": 0.0028288404101483905,
+      "success": true
+    },
+    {
+      "file": "shadow-04.jpg",
+      "condition": "shadowed",
+      "edge_fraction": 0.020727572016460905,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-05.jpg",
+      "condition": "unshadowed",
+      "edge_fraction": 0.063679012345679,
+      "iou": 0.9656262346898459,
+      "corner_rmse": 0.0038453148481363314,
+      "success": true
+    },
+    {
+      "file": "shadow-05.jpg",
+      "condition": "shadowed",
+      "edge_fraction": 0.02865514403292181,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    }
+  ]
+}
