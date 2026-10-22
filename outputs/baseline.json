@@ -1,0 +1,286 @@
+{
+  "parameters": {
+    "blur_kernel": 5,
+    "canny_low": 50,
+    "canny_high": 150,
+    "min_area_ratio": 0.08
+  },
+  "groups": {
+    "clutter": {
+      "tests": 5,
+      "success": 1,
+      "failure": 4,
+      "success_rate": 0.2
+    },
+    "rotation": {
+      "tests": 5,
+      "success": 0,
+      "failure": 5,
+      "success_rate": 0.0
+    },
+    "shadow": {
+      "tests": 5,
+      "success": 1,
+      "failure": 4,
+      "success_rate": 0.2
+    },
+    "simple": {
+      "tests": 5,
+      "success": 2,
+      "failure": 3,
+      "success_rate": 0.4
+    }
+  },
+  "success": 4,
+  "tests": 20,
+  "results": [
+    {
+      "file": "simple-01.jpg",
+      "group": "simple",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "simple-02.jpg",
+      "group": "simple",
+      "detected": true,
+      "corners": [
+        [
+          177.0,
+          300.0
+        ],
+        [
+          497.0,
+          275.0
+        ],
+        [
+          527.0,
+          598.0
+        ],
+        [
+          209.0,
+          640.0
+        ]
+      ],
+      "iou": 0.9829572265245511,
+      "corner_rmse": 0.002447526570182056,
+      "success": true
+    },
+    {
+      "file": "simple-03.jpg",
+      "group": "simple",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "simple-04.jpg",
+      "group": "simple",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "simple-05.jpg",
+      "group": "simple",
+      "detected": true,
+      "corners": [
+        [
+          175.0,
+          267.0
+        ],
+        [
+          490.0,
+          271.0
+        ],
+        [
+          490.0,
+          663.0
+        ],
+        [
+          186.0,
+          683.0
+        ]
+      ],
+      "iou": 0.9879767107941366,
+      "corner_rmse": 0.0031205101643550517,
+      "success": true
+    },
+    {
+      "file": "shadow-01.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-02.jpg",
+      "group": "shadow",
+      "detected": true,
+      "corners": [
+        [
+          245.0,
+          269.0
+        ],
+        [
+          419.0,
+          274.0
+        ],
+        [
+          427.0,
+          600.0
+        ],
+        [
+          247.0,
+          606.0
+        ]
+      ],
+      "iou": 0.9676756045402204,
+      "corner_rmse": 0.0035849483227984743,
+      "success": true
+    },
+    {
+      "file": "shadow-03.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-04.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-05.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "rotation-01.jpg",
+      "group": "rotation",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "rotation-02.jpg",
+      "group": "rotation",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "rotation-03.jpg",
+      "group": "rotation",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "rotation-04.jpg",
+      "group": "rotation",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "rotation-05.jpg",
+      "group": "rotation",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "clutter-01.jpg",
+      "group": "clutter",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "clutter-02.jpg",
+      "group": "clutter",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "clutter-03.jpg",
+      "group": "clutter",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "clutter-04.jpg",
+      "group": "clutter",
+      "detected": true,
+      "corners": [
+        [
+          193.0,
+          271.0
+        ],
+        [
+          458.0,
+          258.0
+        ],
+        [
+          474.0,
+          629.0
+        ],
+        [
+          238.0,
+          641.0
+        ]
+      ],
+      "iou": 0.9613222585787399,
+      "corner_rmse": 0.006118310779704269,
+      "success": true
+    },
+    {
+      "file": "clutter-05.jpg",
+      "group": "clutter",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    }
+  ]
+}

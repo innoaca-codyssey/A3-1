@@ -59,3 +59,47 @@ OK
 DocUNet의 서로 다른 실제 사진20장을 선택했습니다. 단순 배경5장, 그림자5장, 기울어짐5장, 복잡한 배경5장으로 구성했습니다. 그림자 그룹에는 알려진 강도의 부드러운 명암 변화를, 회전 그룹에는 평면 내55도 회전을 통제 변형으로 적용했습니다. 실제 촬영 카메라의3차원 각도를 알고 있다고 해석하지 않습니다. 원본 사진은 변경하지 않고 실습 사본에 변형했습니다.
 
 검출기를 실행하기 전에 원본/변형 이미지를 보고 문서의 네 꼭짓점을 정규화 좌표로 주석하고, 경계 그림20장을 확인했습니다. 곡면 종이의 바깥 경계는 근사 사각형이며 이 주석의 한계를 보고서에서 구분합니다. 기하학적 검출은 주석과의IoU0.75 이상/정규화 꼭짓점RMSE0.04 이하로 측정하고, 실제 스캔본의 판독/왜곡 여부는 따로 검토합니다.
+
+## 기본 설정의 실제 사진 평가
+
+```text
+$ python evaluate.py --cases data/cases --stages output/stages
+{
+  "parameters": {
+    "blur_kernel": 5,
+    "canny_low": 50,
+    "canny_high": 150,
+    "min_area_ratio": 0.08
+  },
+  "groups": {
+    "clutter": {
+      "tests": 5,
+      "success": 1,
+      "failure": 4,
+      "success_rate": 0.2
+    },
+    "rotation": {
+      "tests": 5,
+      "success": 0,
+      "failure": 5,
+      "success_rate": 0.0
+    },
+    "shadow": {
+      "tests": 5,
+      "success": 1,
+      "failure": 4,
+      "success_rate": 0.2
+    },
+    "simple": {
+      "tests": 5,
+      "success": 2,
+      "failure": 3,
+      "success_rate": 0.4
+    }
+  },
+  "success": 4,
+  "tests": 20
+}
+```
+
+이 수치는 사전 시각 주석에 대한 기하학적 검출 결과입니다. 네 꼭짓점 검출 여부만으로 휘어진 글씨가 펴졌다고 판단하지 않고 스캔본을 별도로 검토합니다.
