@@ -1,0 +1,457 @@
+{
+  "parameters": {
+    "blur_kernel": 5,
+    "canny_low": 50,
+    "canny_high": 150,
+    "min_area_ratio": 0.02,
+    "selection": "scored"
+  },
+  "groups": {
+    "clutter": {
+      "tests": 5,
+      "success": 2,
+      "failure": 3,
+      "success_rate": 0.4
+    },
+    "rotation": {
+      "tests": 5,
+      "success": 4,
+      "failure": 1,
+      "success_rate": 0.8
+    },
+    "shadow": {
+      "tests": 5,
+      "success": 1,
+      "failure": 4,
+      "success_rate": 0.2
+    },
+    "simple": {
+      "tests": 5,
+      "success": 4,
+      "failure": 1,
+      "success_rate": 0.8
+    }
+  },
+  "success": 11,
+  "tests": 20,
+  "results": [
+    {
+      "file": "simple-01.jpg",
+      "group": "simple",
+      "detected": true,
+      "corners": [
+        [
+          278.0,
+          266.0
+        ],
+        [
+          400.0,
+          268.0
+        ],
+        [
+          401.0,
+          654.0
+        ],
+        [
+          273.0,
+          652.0
+        ]
+      ],
+      "iou": 0.9796250854821191,
+      "corner_rmse": 0.0028031006786103643,
+      "success": true
+    },
+    {
+      "file": "simple-02.jpg",
+      "group": "simple",
+      "detected": true,
+      "corners": [
+        [
+          177.0,
+          300.0
+        ],
+        [
+          497.0,
+          275.0
+        ],
+        [
+          527.0,
+          598.0
+        ],
+        [
+          209.0,
+          640.0
+        ]
+      ],
+      "iou": 0.9829572265245511,
+      "corner_rmse": 0.002447526570182056,
+      "success": true
+    },
+    {
+      "file": "simple-03.jpg",
+      "group": "simple",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "simple-04.jpg",
+      "group": "simple",
+      "detected": true,
+      "corners": [
+        [
+          221.0,
+          326.0
+        ],
+        [
+          407.0,
+          330.0
+        ],
+        [
+          416.0,
+          656.0
+        ],
+        [
+          222.0,
+          656.0
+        ]
+      ],
+      "iou": 0.9805504122552976,
+      "corner_rmse": 0.002453648637193829,
+      "success": true
+    },
+    {
+      "file": "simple-05.jpg",
+      "group": "simple",
+      "detected": true,
+      "corners": [
+        [
+          175.0,
+          267.0
+        ],
+        [
+          490.0,
+          271.0
+        ],
+        [
+          490.0,
+          663.0
+        ],
+        [
+          186.0,
+          683.0
+        ]
+      ],
+      "iou": 0.9879767107941366,
+      "corner_rmse": 0.0031205101643550517,
+      "success": true
+    },
+    {
+      "file": "shadow-01.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-02.jpg",
+      "group": "shadow",
+      "detected": true,
+      "corners": [
+        [
+          245.0,
+          269.0
+        ],
+        [
+          419.0,
+          274.0
+        ],
+        [
+          427.0,
+          600.0
+        ],
+        [
+          247.0,
+          606.0
+        ]
+      ],
+      "iou": 0.9676756045402204,
+      "corner_rmse": 0.0035849483227984743,
+      "success": true
+    },
+    {
+      "file": "shadow-03.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-04.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "shadow-05.jpg",
+      "group": "shadow",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "rotation-01.jpg",
+      "group": "rotation",
+      "detected": true,
+      "corners": [
+        [
+          345.0,
+          283.0
+        ],
+        [
+          598.0,
+          401.0
+        ],
+        [
+          518.0,
+          546.0
+        ],
+        [
+          279.0,
+          407.0
+        ]
+      ],
+      "iou": 0.9487069063215394,
+      "corner_rmse": 0.004633813451161847,
+      "success": true
+    },
+    {
+      "file": "rotation-02.jpg",
+      "group": "rotation",
+      "detected": true,
+      "corners": [
+        [
+          358.0,
+          182.0
+        ],
+        [
+          707.0,
+          490.0
+        ],
+        [
+          448.0,
+          753.0
+        ],
+        [
+          118.0,
+          519.0
+        ]
+      ],
+      "iou": 0.17349182274581731,
+      "corner_rmse": 0.13852500731684148,
+      "success": false
+    },
+    {
+      "file": "rotation-03.jpg",
+      "group": "rotation",
+      "detected": true,
+      "corners": [
+        [
+          370.0,
+          237.0
+        ],
+        [
+          604.0,
+          362.0
+        ],
+        [
+          482.0,
+          560.0
+        ],
+        [
+          266.0,
+          407.0
+        ]
+      ],
+      "iou": 0.8457610260825675,
+      "corner_rmse": 0.018605531057827557,
+      "success": true
+    },
+    {
+      "file": "rotation-04.jpg",
+      "group": "rotation",
+      "detected": true,
+      "corners": [
+        [
+          382.0,
+          280.0
+        ],
+        [
+          622.0,
+          419.0
+        ],
+        [
+          504.0,
+          593.0
+        ],
+        [
+          271.0,
+          440.0
+        ]
+      ],
+      "iou": 0.9543544789667514,
+      "corner_rmse": 0.003708215973757899,
+      "success": true
+    },
+    {
+      "file": "rotation-05.jpg",
+      "group": "rotation",
+      "detected": true,
+      "corners": [
+        [
+          394.0,
+          244.0
+        ],
+        [
+          609.0,
+          392.0
+        ],
+        [
+          479.0,
+          586.0
+        ],
+        [
+          285.0,
+          423.0
+        ]
+      ],
+      "iou": 0.9694526362443108,
+      "corner_rmse": 0.0028502127477760147,
+      "success": true
+    },
+    {
+      "file": "clutter-01.jpg",
+      "group": "clutter",
+      "detected": true,
+      "corners": [
+        [
+          233.0,
+          298.0
+        ],
+        [
+          286.0,
+          310.0
+        ],
+        [
+          287.0,
+          589.0
+        ],
+        [
+          221.0,
+          589.0
+        ]
+      ],
+      "iou": 0.2437735955372739,
+      "corner_rmse": 0.10560976817783985,
+      "success": false
+    },
+    {
+      "file": "clutter-02.jpg",
+      "group": "clutter",
+      "detected": false,
+      "corners": null,
+      "iou": 0.0,
+      "corner_rmse": null,
+      "success": false
+    },
+    {
+      "file": "clutter-03.jpg",
+      "group": "clutter",
+      "detected": true,
+      "corners": [
+        [
+          329.0,
+          217.0
+        ],
+        [
+          516.0,
+          154.0
+        ],
+        [
+          636.0,
+          227.0
+        ],
+        [
+          332.0,
+          278.0
+        ]
+      ],
+      "iou": 0.0,
+      "corner_rmse": 0.2868133317753331,
+      "success": false
+    },
+    {
+      "file": "clutter-04.jpg",
+      "group": "clutter",
+      "detected": true,
+      "corners": [
+        [
+          193.0,
+          271.0
+        ],
+        [
+          458.0,
+          258.0
+        ],
+        [
+          474.0,
+          629.0
+        ],
+        [
+          238.0,
+          641.0
+        ]
+      ],
+      "iou": 0.9613222585787399,
+      "corner_rmse": 0.006118310779704269,
+      "success": true
+    },
+    {
+      "file": "clutter-05.jpg",
+      "group": "clutter",
+      "detected": true,
+      "corners": [
+        [
+          156.0,
+          256.0
+        ],
+        [
+          464.0,
+          289.0
+        ],
+        [
+          474.0,
+          559.0
+        ],
+        [
+          203.0,
+          591.0
+        ]
+      ],
+      "iou": 0.8953877606038821,
+      "corner_rmse": 0.02050993748898697,
+      "success": true
+    }
+  ]
+}

@@ -103,3 +103,50 @@ $ python evaluate.py --cases data/cases --stages output/stages
 ```
 
 이 수치는 사전 시각 주석에 대한 기하학적 검출 결과입니다. 네 꼭짓점 검출 여부만으로 휘어진 글씨가 펴졌다고 판단하지 않고 스캔본을 별도로 검토합니다.
+
+## 후보 선택 개선
+
+초기의 가장 큰 외곽 사각형 방식은 사진 테두리/책상/키보드와 문서를 혼동했습니다. 내부 윤곽도 비교하고 여러 근사 정밀도에서 후보를 만든 뒤 면적, 주변 대비, 밝기와 중심 위치를 함께 사용하도록 수정했습니다. 밝은 종이/중앙 문서에 유리한 규칙이며 검은 명함이나 주변의 다른 밝은 사각형에서는 한계가 있습니다.
+
+```text
+$ python evaluate.py --cases data/cases --min-area .02 --selection scored
+{
+  "parameters": {
+    "blur_kernel": 5,
+    "canny_low": 50,
+    "canny_high": 150,
+    "min_area_ratio": 0.02,
+    "selection": "scored"
+  },
+  "groups": {
+    "clutter": {
+      "tests": 5,
+      "success": 2,
+      "failure": 3,
+      "success_rate": 0.4
+    },
+    "rotation": {
+      "tests": 5,
+      "success": 4,
+      "failure": 1,
+      "success_rate": 0.8
+    },
+    "shadow": {
+      "tests": 5,
+      "success": 1,
+      "failure": 4,
+      "success_rate": 0.2
+    },
+    "simple": {
+      "tests": 5,
+      "success": 4,
+      "failure": 1,
+      "success_rate": 0.8
+    }
+  },
+  "success": 11,
+  "tests": 20
+}
+```
+
+초기4/20과 개선11/20은 같은 사전 주석/같은20장에 대한 기하학적 비교입니다. 초기 소스는 a43c632이며 현재는 `--selection largest --min-area .08`로 비교 방식을 선택할 수 있습니다. 스캔본의 휘어진 글씨는 별도로 검토합니다.

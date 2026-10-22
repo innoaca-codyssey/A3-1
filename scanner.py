@@ -139,58 +139,84 @@ def find_document(
     blur_kernel=5,
     canny_low=50,
     canny_high=150,
-    min_area_ratio=0.08,
+    min_area_ratio=0.02,
     morph_close=True,
+    selection="scored",
 ):
-    """문서 외곽을 찾아 단계 이미지와 꼭짓점을 반환한다."""
+    """닫힌 윤곽의 면적/주변 대비/중심성을 비교해 문서 후보를 찾는다.
+
+    largest는 초기 외곽/최대면적 방식을 재현하는 비교용 설정이다.
+    """
     if image is None or image.size == 0:
-        raise ValueError("empty image")
-    if blur_kernel <= 0 or blur_kernel % 2 == 0:
-        raise ValueError("blur_kernel must be positive odd")
-    if canny_low < 0 or canny_high < 0 or canny_low > canny_high:
-        raise ValueError("invalid canny thresholds")
-    if not (0 < min_area_ratio <= 1):
-        raise ValueError("min_area_ratio must be in (0,1]")
-    img = image.copy()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img.copy()
+        raise ValueError("빈 이미지입니다")
+    if image.dtype != np.uint8 or image.ndim not in (2, 3):
+        raise ValueError("uint8 Grayscale/BGR 이미지가 필요합니다")
+    if (
+        not isinstance(blur_kernel, (int, np.integer))
+        or blur_kernel <= 0
+        or blur_kernel % 2 == 0
+    ):
+        raise ValueError("블러 커널은 양의 홀수 정수여야 합니다")
+    if canny_low < 0 or canny_high < canny_low or not 0 < min_area_ratio <= 1:
+        raise ValueError("Canny/면적 임계값을 확인하세요")
+    if selection not in ("largest", "scored"):
+        raise ValueError("지원하지 않는 후보 선택 방식입니다")
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if image.ndim == 3 else image.copy()
     blur = cv2.GaussianBlur(gray, (blur_kernel, blur_kernel), 0)
     edges = cv2.Canny(blur, canny_low, canny_high)
     if morph_close:
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        edges2 = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel)
-    else:
-        edges2 = edges
-    contours, _ = cv2.findContours(edges2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    area_min = image.shape[0] * image.shape[1] * float(min_area_ratio)
+        edges = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    mode = cv2.RETR_EXTERNAL if selection == "largest" else cv2.RETR_LIST
+    contours, _ = cv2.findContours(edges, mode, cv2.CHAIN_APPROX_SIMPLE)
+    total = image.shape[0] * image.shape[1]
+    view = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    cv2.drawContours(view, contours, -1, (0, 255, 255), 1)
     best = None
-    best_area = -1.0
-    contour_vis = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-    cv2.drawContours(contour_vis, contours, -1, (0, 255, 255), 1)
-    for cnt in contours:
-        area = float(cv2.contourArea(cnt))
-        if area < area_min:
+    best_score = -1.0
+    seen = set()
+    epsilons = (0.02,) if selection == "largest" else (0.015, 0.02, 0.03, 0.04, 0.05)
+    for contour in contours:
+        area = float(cv2.contourArea(contour))
+        if area < total * min_area_ratio:
             continue
-        peri = cv2.arcLength(cnt, True)
-        approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
-        if len(approx) != 4 or not cv2.isContourConvex(approx):
-            continue
-        pts = approx.reshape(4, 2).astype(np.float32)
-        try:
-            ordered = order_points(pts)
-        except ValueError:
-            continue
-        if area > best_area:
-            best = ordered
-            best_area = area
+        perimeter = cv2.arcLength(contour, True)
+        for epsilon in epsilons:
+            approximation = cv2.approxPolyDP(contour, epsilon * perimeter, True)
+            if len(approximation) != 4 or not cv2.isContourConvex(approximation):
+                continue
+            try:
+                points = order_points(approximation.reshape(4, 2))
+            except ValueError:
+                continue
+            key = tuple(points.ravel())
+            if key in seen:
+                continue
+            seen.add(key)
+            if selection == "largest":
+                score = area
+            else:
+                mask = np.zeros_like(gray)
+                cv2.fillConvexPoly(mask, points.astype(np.int32), 255)
+                band = cv2.subtract(cv2.dilate(mask, np.ones((15, 15), np.uint8)), mask)
+                if not np.any(band):
+                    continue
+                inside = cv2.mean(gray, mask=mask)[0]
+                outside = cv2.mean(gray, mask=band)[0]
+                contrast = abs(inside - outside) / 255.0
+                center = points.mean(axis=0) / np.array(
+                    [image.shape[1], image.shape[0]]
+                )
+                centrality = 1 / (1 + 2 * np.linalg.norm(center - 0.5))
+                score = (
+                    (contrast * np.sqrt(area / total) + 0.03 * area / total)
+                    * (0.5 + inside / 255)
+                    * centrality
+                )
+            if score > best_score:
+                best, best_score = points, score
     if best is not None:
-        cv2.polylines(contour_vis, [best.astype(np.int32)], True, (0, 255, 0), 2)
-    stages = {
-        "gray": gray,
-        "preprocessed": blur,
-        "edges": edges2,
-        "contours": contour_vis,
-    }
-    return stages, best
+        cv2.polylines(view, [best.astype(np.int32)], True, (0, 255, 0), 2)
+    return {"gray": gray, "preprocessed": blur, "edges": edges, "contours": view}, best
 
 
 def warp_document(image, corners):
@@ -268,7 +294,8 @@ def scan_image(path, output_dir, parameters=None):
         blur_kernel=int(params.get("blur_kernel", 5)),
         canny_low=int(params.get("canny_low", 50)),
         canny_high=int(params.get("canny_high", 150)),
-        min_area_ratio=float(params.get("min_area_ratio", 0.08)),
+        min_area_ratio=float(params.get("min_area_ratio", 0.02)),
+        selection=params.get("selection", "scored"),
         morph_close=bool(params.get("morph_close", True)),
     )
     warped = binary = None
@@ -354,7 +381,8 @@ def run_gui(
                 blur_kernel=blur,
                 canny_low=low,
                 canny_high=high,
-                min_area_ratio=float(params.get("min_area_ratio", 0.08)),
+                min_area_ratio=float(params.get("min_area_ratio", 0.02)),
+                selection=params.get("selection", "scored"),
             )
             warped = binary = None
             if corners is not None:
@@ -396,7 +424,8 @@ def build_arg_parser():
     p.add_argument("--blur", type=int, default=5)
     p.add_argument("--canny-low", type=int, default=50)
     p.add_argument("--canny-high", type=int, default=150)
-    p.add_argument("--min-area-ratio", type=float, default=0.08)
+    p.add_argument("--min-area-ratio", type=float, default=0.02)
+    p.add_argument("--selection", choices=["scored", "largest"], default="scored")
     p.add_argument("--pdf")
     return p
 
@@ -411,6 +440,7 @@ def main(argv=None):
         "canny_low": args.canny_low,
         "canny_high": args.canny_high,
         "min_area_ratio": args.min_area_ratio,
+        "selection": args.selection,
     }
     if args.headless:
         if not args.image:

@@ -93,6 +93,7 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("outputs/baseline.json"))
     parser.add_argument("--stages", type=Path)
     parser.add_argument("--sweep", action="store_true")
+    parser.add_argument("--selection", choices=["scored", "largest"], default="scored")
     parser.add_argument("--blur", type=int, default=5)
     parser.add_argument("--low", type=int, default=50)
     parser.add_argument("--high", type=int, default=150)
@@ -110,6 +111,7 @@ def main():
                 "canny_low": thresholds[0],
                 "canny_high": thresholds[1],
                 "min_area_ratio": area,
+                "selection": args.selection,
             }
             report = evaluate_cases(args.cases, args.manifest, parameters)
             results.append(report)
@@ -130,6 +132,7 @@ def main():
             "canny_low": args.low,
             "canny_high": args.high,
             "min_area_ratio": args.min_area,
+            "selection": args.selection,
         }
         result = evaluate_cases(args.cases, args.manifest, parameters, args.stages)
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
