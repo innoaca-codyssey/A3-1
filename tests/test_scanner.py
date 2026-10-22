@@ -12,6 +12,33 @@ import scanner
 
 
 class ScannerTests(unittest.TestCase):
+    def test_circle_is_not_document_quad(self):
+        """원형 배경을 과도하게 근사한 사각형을 문서로 고르지 않는다."""
+        image = np.full((400, 400, 3), 30, np.uint8)
+        cv2.circle(image, (200, 200), 150, (220, 220, 220), -1)
+        _, corners = scanner.find_document(image, min_area_ratio=0.02)
+        self.assertIsNone(corners)
+
+    def test_warp_preserves_corner_order(self):
+        """서로 다른 네 모서리 색이 뒤바뀌거나 전치되지 않는다."""
+        image = np.zeros((100, 100, 3), np.uint8)
+        points = np.array([[10, 10], [90, 10], [90, 90], [10, 90]], np.float32)
+        colors = [(0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 255)]
+        for point, color in zip(points, colors):
+            cv2.circle(image, tuple(point.astype(int)), 3, color, -1)
+        warped, _ = scanner.warp_document(image, points)
+        observed = [warped[0, 0], warped[0, -1], warped[-1, -1], warped[-1, 0]]
+        np.testing.assert_array_equal(observed, colors)
+
+    def test_concave_and_nonfinite_points_rejected(self):
+        """유효한 네 꼭짓점이 아닌 좌표를 거절한다."""
+        for points in (
+            [[0, 0], [3, 0], [1, 0.2], [0, 3]],
+            [[0, 0], [3, 0], [3, 3], [np.inf, 3]],
+        ):
+            with self.assertRaises(ValueError):
+                scanner.order_points(points)
+
     def make_doc_image(self, w=600, h=450):
         img = np.full((h, w, 3), 40, np.uint8)
         pts = np.array([[120, 70], [490, 110], [450, 360], [90, 320]], np.int32)

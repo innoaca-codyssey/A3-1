@@ -195,6 +195,9 @@ def find_document(
             if selection == "largest":
                 score = area
             else:
+                quad_area = abs(float(cv2.contourArea(points)))
+                if quad_area / max(area, 1.0) < 0.8:
+                    continue
                 mask = np.zeros_like(gray)
                 cv2.fillConvexPoly(mask, points.astype(np.int32), 255)
                 band = cv2.subtract(cv2.dilate(mask, np.ones((15, 15), np.uint8)), mask)
