@@ -370,6 +370,19 @@ def run_gui(
             255,
             lambda value: None,
         )
+        placements = {
+            "original": (10, 220),
+            "preprocessing": (440, 220),
+            "edges": (870, 220),
+            "contours": (10, 610),
+            "result": (440, 610),
+        }
+        cv2.resizeWindow("controls", 600, 190)
+        cv2.moveWindow("controls", 10, 10)
+        for window, (x, y) in placements.items():
+            cv2.namedWindow(window, cv2.WINDOW_NORMAL)
+            cv2.resizeWindow(window, 410, 340)
+            cv2.moveWindow(window, x, y)
         while True:
             if capture is not None:
                 ok, frame = capture.read()
@@ -379,6 +392,10 @@ def run_gui(
             blur += int(blur % 2 == 0)
             low = cv2.getTrackbarPos("canny_low", "controls")
             high = max(low, cv2.getTrackbarPos("canny_high", "controls"))
+            if blur != cv2.getTrackbarPos("blur", "controls"):
+                cv2.setTrackbarPos("blur", "controls", blur)
+            if high != cv2.getTrackbarPos("canny_high", "controls"):
+                cv2.setTrackbarPos("canny_high", "controls", high)
             stages, corners = find_document(
                 frame,
                 blur_kernel=blur,
@@ -390,6 +407,28 @@ def run_gui(
             warped = binary = None
             if corners is not None:
                 warped, binary = warp_document(frame, corners)
+            info = np.full((72, 600, 3), 245, dtype=np.uint8)
+            cv2.putText(
+                info,
+                f"Blur {blur} | Canny {low}:{high} | s: save  q: quit",
+                (10, 24),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.5,
+                (0, 0, 0),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.putText(
+                info,
+                "Top: Original / Blur / Edges   Bottom: Contours / Scan",
+                (10, 52),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.48,
+                (0, 0, 0),
+                1,
+                cv2.LINE_AA,
+            )
+            cv2.imshow("controls", info)
             cv2.imshow("original", frame)
             cv2.imshow("preprocessing", stages["preprocessed"])
             cv2.imshow("edges", stages["edges"])

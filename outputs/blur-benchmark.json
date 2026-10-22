@@ -1,0 +1,26 @@
+{
+  "loop": {
+    "seconds": 0.07630195905221626,
+    "shape": [
+      256,
+      256
+    ]
+  },
+  "vectorized": {
+    "seconds": 0.0003029999788850546,
+    "shape": [
+      256,
+      256
+    ]
+  },
+  "max_absolute_error": 1.1368683772161603e-13,
+  "shape": [
+    256,
+    256
+  ],
+  "kernel": 5,
+  "sigma": 1.0,
+  "repeats": 3,
+  "timing": "minimum of three measured runs",
+  "speedup": 251.82166458553453
+}

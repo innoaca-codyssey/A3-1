@@ -4,11 +4,11 @@
 
 ## 실행 환경
 
-미션 전용 격리 환경에서 수행합니다. 실제 버전과 데이터 출처는 준비 후 기록합니다.
+Python3.12.14, OpenCV5.0.0.93, NumPy2.5.4를 사용했습니다. Matplotlib/Seaborn은 분석, Pillow는 PDF 내보내기에만 사용합니다. GUI는 Docker의 가상 디스플레이에서도 확인했습니다.
 
 ## 진행 상태
 
-데이터 확보와 환경 준비 중입니다. 실제 실행 결과를 항목별로 추가합니다.
+실제20장 평가와 조건별 실패 분석, NumPy 블러/종횡비/PDF 기능을 구현했습니다. 검출12/20과 판독 품질의 한계를 아래에 구분합니다.
 
 ## 문서 사진
 
@@ -206,3 +206,49 @@ python analyze.py --cases data/cases --originals data/original
 ```
 
 prepare_data는344MB 원본 ZIP과 선택한 사진의 SHA-256을 확인하고 필요한 사진20장/평가 사본20장을 추출합니다. 고정 명세의 source/transform/quad는 [평가 입력과 사전 주석](evaluation/cases.json)에 있습니다. 실제 준비 모듈로 만든 평가 JPEG20개가 기존 평가 입력과 바이트 단위로 일치했습니다. 원본 데이터는 저장소에 포함하지 않습니다. 초기 방식은 현재 버전에서 `--selection largest --min-area .08`로 비교할 수 있습니다.
+
+## 트랙바와 저장
+
+![실행 GUI](outputs/gui.png)
+
+위쪽 세 창은 원본/전처리/엣지, 아래쪽은 윤곽선/스캔 결과입니다. 블러 커널과 Canny low/high를 바꾸면 매 프레임 다시 계산합니다. 짝수 블러 값은 다음 홀수로, high가 low보다 작으면 low로 보정하고 실제 적용 값을 트랙바와 안내 패널에 반영합니다. `s`는 원본과 각 처리 단계를 저장하고 `q`는 종료합니다.
+
+```bash
+python scanner.py --image data/cases/simple-04.jpg --output output
+python scanner.py --camera --output output/camera
+python scanner.py --image data/cases/simple-04.jpg --headless --output output --pdf output/document.pdf
+```
+
+컨테이너 Xvfb에서 실제 OpenCV 창을 띄워 트랙바 값/단계 출력, `s`에 대응하는6개 파일 저장, `q` 종료를 검증했습니다. 카메라 분기는 사진 프레임을 공급하는 fixture로 검증했으며 장치 해제까지 확인했습니다. 물리 웹캠/호스트 카메라 권한을 확인한 결과는 아닙니다. GUI가 없는 환경은 headless 명령으로 같은 검출과 파일 저장을 수행합니다.
+
+## NumPy 블러와 종횡비
+
+가우시안 커널을 정규화하고 반사 경계에 대해 이중 for문과 sliding_window_view/einsum으로 같은 내적을 계산했습니다. 동일한256x256 회색 영상/5x5/sigma1에서3회 중 최소 실행 시간을 비교했습니다.
+
+| 방식 | 시간 |
+|---|---:|
+| 이중 for문 | 0.076302초 |
+| 벡터화 | 0.000303초 |
+
+최대 절대 차이는1.14e-13, 이 실행의 속도 비율은약251.8배였습니다. Python/배열 크기/하드웨어에 따라 달라지는 실측값이며 [측정 원본](outputs/blur-benchmark.json)에 조건을 함께 저장했습니다. 독립 검사는 같은 커널/반사 경계의 OpenCV 결과와도 비교합니다.
+
+출력 너비는 위/아래 변 길이 중 큰 값, 높이는 왼쪽/오른쪽 변 길이 중 큰 값으로 정합니다. 원본 거리로 종횡비를 결정하고 최대 변4000픽셀을 넘으면 함께 축소합니다. 좌표는 중심각으로 볼록 다각형 순서를 정한 뒤 시작점 규칙을 적용합니다. Homography는 네 원본 점을 출력 직사각형 점에 대응시키며, NumPy의(H,W,C)에서 OpenCV 출력 크기(W,H) 순서를 구분했습니다.
+
+## PDF와 변환 결과
+
+[스캔 PDF](outputs/scans.pdf)는 원본44_2.JPG를 전체 해상도에서 실제 검출해 컬러 변환/이진화의2쪽으로 내보냈습니다. 출력879x1487픽셀이며 Poppler로 두 쪽을 렌더해 확인했습니다. 평가용 최대900픽셀 사본과 달리 원해상도 결과를 사용해 작은 글자의 판독이 나아졌습니다. PDF로 저장하는 행위 자체가 곡면/흐림을 복구하지는 않습니다.
+
+![PDF 첫 쪽](outputs/pdf-preview.png)
+
+실제20장의 입력/주석/변환/이진화 비교는 [단순 배경](outputs/review-simple.jpg), [그림자](outputs/review-shadow.jpg), [회전](outputs/review-rotation.jpg), [복잡한 배경](outputs/review-clutter.jpg)에 있습니다. 파란색은 사전 주석, 초록색은 성공한 검출, 빨간색은 잘못 검출한 후보입니다.
+
+## 설치
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+```
+
+원본 ZIP을 이미 받았다면 `python prepare_data.py --archive /path/to/original.zip`으로 같은 입력을 준비할 수 있습니다. PDF만 만들 때 추가 라이브러리를 불러오며 문서 검출과 NumPy 블러에는 사용하지 않습니다.

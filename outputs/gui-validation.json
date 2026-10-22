@@ -1,0 +1,16 @@
+{
+  "display": "Docker Xvfb 1400x1000",
+  "file_gui_exit": 0,
+  "trackbar_normalization": true,
+  "save_files": [
+    "simple-04-000_binary.png",
+    "simple-04-000_contours.png",
+    "simple-04-000_edges.png",
+    "simple-04-000_original.png",
+    "simple-04-000_preprocessed.png",
+    "simple-04-000_warped.png"
+  ],
+  "camera_frame_fixture_exit": 0,
+  "camera_released": true,
+  "physical_camera_tested": false
+}

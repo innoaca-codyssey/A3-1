@@ -1,0 +1,17 @@
+Title:           scans
+CreationDate:    Fri Oct 23 01:55:40 2026 KST
+ModDate:         Fri Oct 23 01:55:40 2026 KST
+Custom Metadata: no
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           2
+Encrypted:       no
+Page size:       879 x 1487 pts
+Page rot:        0
+File size:       539121 bytes
+Optimized:       no
+PDF version:     1.4
