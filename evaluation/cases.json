@@ -1,0 +1,551 @@
+{
+  "source": "DocUNet original photos",
+  "archive_sha256": "ec226874d6845934c88b047c37e4e1a99cb2a8b9c42836739bc09015bcdc4405",
+  "annotation_method": "Visual normalized outer-corner annotations made before scanner evaluation. Approximate image-space geometry, not calibrated camera pose.",
+  "thresholds": {
+    "min_iou": 0.75,
+    "max_normalized_corner_rmse": 0.04
+  },
+  "cases": [
+    {
+      "file": "simple-01.jpg",
+      "group": "simple",
+      "source": "4_1.jpg",
+      "source_sha256": "d63f9cd282fde31efe9e5ff0ab5bbf598447d2019dfa9e685ef48f41f69b6056",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.41,
+          0.295
+        ],
+        [
+          0.594,
+          0.298
+        ],
+        [
+          0.597,
+          0.731
+        ],
+        [
+          0.406,
+          0.729
+        ]
+      ]
+    },
+    {
+      "file": "simple-02.jpg",
+      "group": "simple",
+      "source": "11_1.jpg",
+      "source_sha256": "7bda945f1cf6dea4e1cfaa8d499a08310857331e0012a6eb7dd2ee5da7b216a0",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.263,
+          0.336
+        ],
+        [
+          0.74,
+          0.31
+        ],
+        [
+          0.781,
+          0.664
+        ],
+        [
+          0.308,
+          0.712
+        ]
+      ]
+    },
+    {
+      "file": "simple-03.jpg",
+      "group": "simple",
+      "source": "15_1.jpg",
+      "source_sha256": "ebc3193abfb6fe1effb77bfec8f19512420c49105ef862bb8c0d420f1b415403",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.33,
+          0.319
+        ],
+        [
+          0.702,
+          0.317
+        ],
+        [
+          0.698,
+          0.676
+        ],
+        [
+          0.327,
+          0.674
+        ]
+      ]
+    },
+    {
+      "file": "simple-04.jpg",
+      "group": "simple",
+      "source": "44_2.JPG",
+      "source_sha256": "d3e93437137a60b859213b4a40b35bfe42382f38c1e639846a2d865a36de058c",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.327,
+          0.367
+        ],
+        [
+          0.6,
+          0.367
+        ],
+        [
+          0.616,
+          0.731
+        ],
+        [
+          0.33,
+          0.731
+        ]
+      ]
+    },
+    {
+      "file": "simple-05.jpg",
+      "group": "simple",
+      "source": "38_1.JPG",
+      "source_sha256": "ac9ba05c21666a934ae0690de4c37c52db1a8c83524812b0d1c9511c088ba888",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.26,
+          0.3
+        ],
+        [
+          0.727,
+          0.302
+        ],
+        [
+          0.727,
+          0.743
+        ],
+        [
+          0.273,
+          0.757
+        ]
+      ]
+    },
+    {
+      "file": "shadow-01.jpg",
+      "group": "shadow",
+      "source": "2_1.jpg",
+      "source_sha256": "939604327fe5c5801fc19f532d3a7f50c87d4b8387511da3a8359a9e8e374e2a",
+      "transform": "resize max edge 900; controlled soft shadow, left factor .25 to right 1.0",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.441,
+          0.236
+        ],
+        [
+          0.676,
+          0.248
+        ],
+        [
+          0.587,
+          0.807
+        ],
+        [
+          0.317,
+          0.769
+        ]
+      ]
+    },
+    {
+      "file": "shadow-02.jpg",
+      "group": "shadow",
+      "source": "5_1.jpg",
+      "source_sha256": "90db0a219a46243b48618343ffa9239fb0187b4c36d40c54c84b36bf1a6c479a",
+      "transform": "resize max edge 900; controlled soft shadow, left factor .25 to right 1.0",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.359,
+          0.298
+        ],
+        [
+          0.625,
+          0.31
+        ],
+        [
+          0.635,
+          0.671
+        ],
+        [
+          0.365,
+          0.676
+        ]
+      ]
+    },
+    {
+      "file": "shadow-03.jpg",
+      "group": "shadow",
+      "source": "24_1.jpg",
+      "source_sha256": "28b1d6823ea61785fd1d446aae853c916d4e241259fb7d84baf0fdd550ebc07a",
+      "transform": "resize max edge 900; controlled soft shadow, left factor .25 to right 1.0",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.333,
+          0.333
+        ],
+        [
+          0.695,
+          0.331
+        ],
+        [
+          0.654,
+          0.698
+        ],
+        [
+          0.295,
+          0.657
+        ]
+      ]
+    },
+    {
+      "file": "shadow-04.jpg",
+      "group": "shadow",
+      "source": "41_1.JPG",
+      "source_sha256": "c199ed7d9cad5c33b767339150e76e686e57315627ce28525955663f54ddfc9e",
+      "transform": "resize max edge 900; controlled soft shadow, left factor .25 to right 1.0",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.305,
+          0.31
+        ],
+        [
+          0.676,
+          0.314
+        ],
+        [
+          0.717,
+          0.731
+        ],
+        [
+          0.327,
+          0.731
+        ]
+      ]
+    },
+    {
+      "file": "shadow-05.jpg",
+      "group": "shadow",
+      "source": "47_2.JPG",
+      "source_sha256": "5bff368ba3a897a0e59b5d5409741421a4b87369c2bbf363b670249e44087b0d",
+      "transform": "resize max edge 900; controlled soft shadow, left factor .25 to right 1.0",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.33,
+          0.338
+        ],
+        [
+          0.695,
+          0.333
+        ],
+        [
+          0.689,
+          0.767
+        ],
+        [
+          0.33,
+          0.767
+        ]
+      ]
+    },
+    {
+      "file": "rotation-01.jpg",
+      "group": "rotation",
+      "source": "3_1.jpg",
+      "source_sha256": "beceb4a541df3e007aedc650be525a5722731ada09525ecb4def992e1b8c82a0",
+      "transform": "resize max edge 900; controlled in-plane rotation 55 degrees, expanded canvas",
+      "width": 900,
+      "height": 856,
+      "quad_normalized": [
+        [
+          0.383,
+          0.33
+        ],
+        [
+          0.664,
+          0.468
+        ],
+        [
+          0.567,
+          0.635
+        ],
+        [
+          0.31,
+          0.485
+        ]
+      ]
+    },
+    {
+      "file": "rotation-02.jpg",
+      "group": "rotation",
+      "source": "7_1.jpg",
+      "source_sha256": "125ea43ba7214daab05f94fda1f5a71435ebe8c5ab436662c0f65d290b95c1a9",
+      "transform": "resize max edge 900; controlled in-plane rotation 55 degrees, expanded canvas",
+      "width": 900,
+      "height": 856,
+      "quad_normalized": [
+        [
+          0.391,
+          0.353
+        ],
+        [
+          0.636,
+          0.568
+        ],
+        [
+          0.576,
+          0.663
+        ],
+        [
+          0.326,
+          0.46
+        ]
+      ]
+    },
+    {
+      "file": "rotation-03.jpg",
+      "group": "rotation",
+      "source": "26_1.jpg",
+      "source_sha256": "3a5338697d1748f48f3be9a5dd3548dbd442ae1d467266e96dbc042efe821f24",
+      "transform": "resize max edge 900; controlled in-plane rotation 55 degrees, expanded canvas",
+      "width": 900,
+      "height": 856,
+      "quad_normalized": [
+        [
+          0.381,
+          0.263
+        ],
+        [
+          0.683,
+          0.43
+        ],
+        [
+          0.557,
+          0.665
+        ],
+        [
+          0.269,
+          0.465
+        ]
+      ]
+    },
+    {
+      "file": "rotation-04.jpg",
+      "group": "rotation",
+      "source": "36_1.jpg",
+      "source_sha256": "e995ac813f35f95574094b9a9afe33b0d782ac4fa897204fcc52022cb3900e77",
+      "transform": "resize max edge 900; controlled in-plane rotation 55 degrees, expanded canvas",
+      "width": 900,
+      "height": 856,
+      "quad_normalized": [
+        [
+          0.429,
+          0.33
+        ],
+        [
+          0.688,
+          0.483
+        ],
+        [
+          0.557,
+          0.695
+        ],
+        [
+          0.302,
+          0.518
+        ]
+      ]
+    },
+    {
+      "file": "rotation-05.jpg",
+      "group": "rotation",
+      "source": "56_1.JPG",
+      "source_sha256": "a1d3cc2d20d1241ed7d4fbc3e4dc387d05b7c8caadb7fcd00b8ef34aa3688ced",
+      "transform": "resize max edge 900; controlled in-plane rotation 55 degrees, expanded canvas",
+      "width": 900,
+      "height": 856,
+      "quad_normalized": [
+        [
+          0.441,
+          0.28
+        ],
+        [
+          0.679,
+          0.455
+        ],
+        [
+          0.536,
+          0.685
+        ],
+        [
+          0.317,
+          0.495
+        ]
+      ]
+    },
+    {
+      "file": "clutter-01.jpg",
+      "group": "clutter",
+      "source": "1_1.jpg",
+      "source_sha256": "8cf105b17cda19dabea36bda7d699a508379a01a4e1ab0ba2ff2a410c0e16b99",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.337,
+          0.31
+        ],
+        [
+          0.651,
+          0.302
+        ],
+        [
+          0.686,
+          0.645
+        ],
+        [
+          0.33,
+          0.657
+        ]
+      ]
+    },
+    {
+      "file": "clutter-02.jpg",
+      "group": "clutter",
+      "source": "2_2.jpg",
+      "source_sha256": "4e2b591b90446dbd2c67bcce5da51bdd643230a4893bae8d37e93e68c8948d45",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.295,
+          0.212
+        ],
+        [
+          0.565,
+          0.2
+        ],
+        [
+          0.721,
+          0.712
+        ],
+        [
+          0.425,
+          0.774
+        ]
+      ]
+    },
+    {
+      "file": "clutter-03.jpg",
+      "group": "clutter",
+      "source": "21_1.jpg",
+      "source_sha256": "04261e1b8e586cef72b9a2d62cd28fb6cf91cf231a1d21c3201ae139f12e0adc",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.391,
+          0.314
+        ],
+        [
+          0.673,
+          0.333
+        ],
+        [
+          0.654,
+          0.741
+        ],
+        [
+          0.33,
+          0.724
+        ]
+      ]
+    },
+    {
+      "file": "clutter-04.jpg",
+      "group": "clutter",
+      "source": "22_1.jpg",
+      "source_sha256": "152f95d9f39d7e4bd99eaf1ea08acbdad58ad83dccc493a8eb9cae8f1ee4125c",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.289,
+          0.302
+        ],
+        [
+          0.686,
+          0.288
+        ],
+        [
+          0.708,
+          0.686
+        ],
+        [
+          0.356,
+          0.714
+        ]
+      ]
+    },
+    {
+      "file": "clutter-05.jpg",
+      "group": "clutter",
+      "source": "60_2.JPG",
+      "source_sha256": "d6747399b9484c16db759ab985815c4a378f02d98451c1b08217e8923ccb2466",
+      "transform": "resize max edge 900",
+      "width": 675,
+      "height": 900,
+      "quad_normalized": [
+        [
+          0.295,
+          0.3
+        ],
+        [
+          0.695,
+          0.319
+        ],
+        [
+          0.695,
+          0.626
+        ],
+        [
+          0.302,
+          0.657
+        ]
+      ]
+    }
+  ]
+}
